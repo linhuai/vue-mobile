@@ -10,13 +10,14 @@ import routerConfig from './router';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
-Vue.prototype.$http = axios;
+
+import store from './store';
 
 var router = new VueRouter(routerConfig);
 
 new Vue({
 	el: "#app",
-	store,
 	router: router,
+	store,
 	render: h => h(App)
 })

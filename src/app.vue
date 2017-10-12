@@ -1,12 +1,17 @@
 <template>
-	<div>
+	<div class="wrapper">
 		<vHeader></vHeader>
 		<router-view></router-view>
 	</div>
 </template>
 
-<style>
-
+<style lang="less">
+.wrapper{
+	overflow: hidden;
+}
+.main{
+	margin-top: 2.34rem;
+}
 </style>
 
 <script>

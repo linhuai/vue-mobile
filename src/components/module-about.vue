@@ -19,7 +19,6 @@
 	.module{
 		background-color: #333;
 		width: 10rem;
-		margin: 0;
 		margin-top: 0.2rem;
 
 		.module-title{

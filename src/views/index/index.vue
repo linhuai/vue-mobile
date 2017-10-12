@@ -1,6 +1,9 @@
 <template>
-	<div>
+	<div class="main">
 		<template v-for="item in modules">
+			<template v-if="item.type == 'slider'">
+				<vBanner :info="item"></vBanner>
+			</template>
 			<template v-if="item.type == 'product'">
 				<vProduct :info="item"></vProduct>
 			</template>
@@ -18,25 +21,31 @@
 </template>
 
 <script>
-import swiper from '../components/swiper.vue'
-import product from '../components/module-product.vue'
-import news from '../components/module-news.vue'
-import tjcp from '../components/module-tjcp.vue'
-import about from '../components/module-about.vue'
+import banner from '../../components/banner.vue'
+import product from '../../components/module-product.vue'
+import news from '../../components/module-news.vue'
+import tjcp from '../../components/module-tjcp.vue'
+import about from '../../components/module-about.vue'
 
 export default {
 	data: function(){
 		return {
-			modules: []
+
 		}
 	},
-	mounted: function(){
-		let _self = this;
-		_self.$http.get('/index').then( res => {
-			_self.modules = res.data;
-		})
+	created: function(){
+		this.$store.dispatch('LOAD_MODULES_LIST')
+	},
+	computed: {
+		modules () {
+			return this.$store.state.index.modules
+		}
+	},
+	methods: {
+
 	},
 	components: {
+		vBanner: banner,
 		vProduct: product,
 		vNews: news,
 		vTjcp: tjcp,
@@ -46,13 +55,6 @@ export default {
 </script>
 
 <style lang="less">
-body {
-	color: #727272;
-}
-a {
-	color: #727272;
-	text-decoration: none;
-}
 .module{
 	width: 9.6rem;
 	margin: 0 auto;

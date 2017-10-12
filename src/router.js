@@ -1,9 +1,10 @@
-import index from './views/index.vue'
-import about from './views/about.vue'
-import news from './views/news.vue'
-import product from './views/product.vue'
-import productshow from './views/productshow.vue'
-import protype from './views/protype.vue'
+import index from './views/index/index.vue'
+import about from './views/about/about.vue'
+import news from './views/news/news.vue'
+import product from './views/product/product.vue'
+import proall from './views/product/proall.vue'
+import protype from './views/product/protype.vue'
+import productshow from './views/productshow/productshow.vue'
 
 export default {
 	routes: [
@@ -27,6 +28,10 @@ export default {
 			path: '/product',
 			component: product,
 			children: [
+				{
+					path: '/product',
+					component: proall
+				},
 				{
 					path: '/product/:id',
 					component: protype
