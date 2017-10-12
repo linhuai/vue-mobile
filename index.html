@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue-mobile</title>
+	<style type="text/css">
+	body, div, p, ul, li, dl, dt, dd, ol,
+	h1, h2, h3, h4, h5, h6{
+		padding: 0;
+		margin: 0;
+	}
+	ul{
+		list-style: none;
+	}
+	i{
+		font-style: normal;
+	}
+	body{
+		font-family: 'Microsoft YaHei', Aril;
+	}
+	</style>
+	<script type="text/javascript">
+	(function flexible(window, document){
+		var docEl = document.documentElement;
+		var dpr = window.devicePixelRatio || 1;
+		var scale = 1 / dpr ;
+
+		//set body font size
+		function setBodyFontSize(){
+			if(document.body){
+				document.body.style.fontSize = (12 * dpr) + 'px';
+			}else{
+				document.addEventListener('DOMContentLoaded', setBodyFontSize);
+			}
+		}
+		setBodyFontSize();
+
+		//set rem = clientWidth / 10 
+		function setRemUnit(){
+			var rem = docEl.clientWidth / 10;
+			docEl.style.fontSize = rem + 'px';
+		}
+		setRemUnit();
+		window.addEventListener('resize', setRemUnit);
+		window.addEventListener('pageshow', function (e) {
+			if(e.persisted){
+				setRemUnit();
+			}
+		})
+
+		// add meta
+		var meta = document.createElement('meta');
+		meta.setAttribute('name', 'viewport');
+		meta.setAttribute('content', 'width=device-width, initial-scale=' + scale +',maximum-scale=' + scale + ',minimum-scale=' + scale + ',user-scalable=no');
+		document.head.appendChild(meta);
+
+	})(window, document)
+	</script>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="./dist/build.js"></script>
+</body>
+</html>
